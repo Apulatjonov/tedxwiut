@@ -70,6 +70,16 @@ html,body{overflow-x:hidden}
 }
 
 </style>
+<style id="disable-text-selection">
+html, body, body * {
+  -webkit-user-select: none;
+  user-select: none;
+}
+input, textarea, [contenteditable="true"], [contenteditable="true"] * {
+  -webkit-user-select: text;
+  user-select: text;
+}
+</style>
 </head>
 <body>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
