@@ -1275,7 +1275,7 @@ renderStats();renderYears();renderEvents();renderTalks();renderPeople();
   revealTargets.forEach(el=>{
     if(el.matches('.events-grid,.talks-grid,.people-grid')) el.classList.add('reveal-stagger'); else el.classList.add('reveal');
   });
-  const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');rio.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');rio.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px -8% 0px'});
   revealTargets.forEach(el=>rio.observe(el));
 
   // card light + restrained 3D tilt
