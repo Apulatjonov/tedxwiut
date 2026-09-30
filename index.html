@@ -80,6 +80,21 @@ input, textarea, [contenteditable="true"], [contenteditable="true"] * {
   user-select: text;
 }
 </style>
+<style id="event-card-layout-fix">
+.event-card {display:flex;flex-direction:column;gap:20px;min-width:0}
+.event-year {flex:none}
+.event-meta {position:static;min-width:0;display:flex;flex-direction:column;flex:1}
+.event-meta h3 {overflow-wrap:anywhere;line-height:1.15;margin:10px 0 16px}
+.event-summary {display:flex;flex-direction:column;gap:12px}
+.event-summary p {margin:0}
+.event-meta .status {margin-top:auto;padding-top:20px}
+@media(max-width:600px){
+.event-card,.event-card.featured {min-height:0;padding:24px;gap:18px}
+.event-year {font-size:52px;line-height:1;color:#45454b}
+.event-meta h3 {font-size:28px}
+.event-summary {font-size:16px;line-height:1.6}
+}
+</style>
 </head>
 <body>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
@@ -541,7 +556,7 @@ window.TEDX_DATA = {
     {
       "id": "2023-live",
       "year": 2023,
-      "name": "TEDxWIUTLive",
+      "name": "TEDxWIUT Live",
       "type": "TEDxLive",
       "date": "6 May 2023",
       "venue": "WIUT, Istiqlol St, Tashkent, Uzbekistan",
@@ -739,7 +754,7 @@ window.TEDX_DATA = {
     {
       "id": "2021-women",
       "year": 2021,
-      "name": "TEDxWIUTWomen",
+      "name": "TEDxWIUT Women",
       "type": "TEDxWomen",
       "date": "10 December 2021",
       "venue": "Westminster University Campus, 12 Str. Akhunbabaev, Tashkent, Uzbekistan",
@@ -1148,7 +1163,7 @@ function renderYears(){
 }
 function renderEvents(year='all'){
   const items=D.events.filter(e=>year==='all'||String(e.year)===String(year));
-  $('#eventsGrid').innerHTML=items.map((e,i)=>`<article class="event-card ${i===0&&year==='all'?'featured':''}" data-event="${e.id}" tabindex="0"><div class="event-year">${e.year}</div><div class="event-meta"><div class="event-type">${e.type}</div><h3>${e.name}</h3><div class="event-summary">${e.date} · ${e.venue}<br>${e.summary}</div><div class="status ${e.status==='archiving'?'progress':''}">${e.date}</div></div></article>`).join('');
+  $('#eventsGrid').innerHTML=items.map((e,i)=>`<article class="event-card ${i===0&&year==='all'?'featured':''}" data-event="${e.id}" tabindex="0"><div class="event-year">${e.year}</div><div class="event-meta"><div class="event-type">${e.type}</div><h3>${e.name}</h3><div class="event-summary"><p class="event-location">${e.venue}</p><p>${e.summary}</p></div><div class="status ${e.status==='archiving'?'progress':''}">${e.date}</div></div></article>`).join('');
   $$('.event-card').forEach(c=>{c.addEventListener('click',()=>openEvent(c.dataset.event));c.addEventListener('keydown',ev=>{if(ev.key==='Enter')openEvent(c.dataset.event)})});
 }
 function renderTalks(){
